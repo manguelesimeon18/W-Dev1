@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html Lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tous les CERs</title>
+        <link rel="stylesheet" href="styles/styles.css">
+
+    </head>
+ <body>
+
+        <header class="header">
+            <div class="container header__inner">
+                <a href="index.html" class="header__logo">
+                    <img src="assets/images/logo.png" alt="Logo Archiva">
+                </a>
+                <nav class="nav">
+                    <!-- Case à cocher cachée pour le menu mobile -->
+                    <input type="checkbox" id="nav-toggle" class="nav__checkbox">
+                     <!-- label hamburger coche/decoche la case ci-dessus -->
+                    <label for="nav-toggle" class="nav__toggle" aria-label="Ouvrir le menu">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="3" y1="6"  x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </label>
+
+                
+                <!-- Panneau du menu : barre horizontale en bureau, plein écran en mobile -->
+                <div class="nav__panel">
+                    <ul class="nav__list">
+                       <!-- La croix de fermeture est un second label lié à la même case -->
+                        <label for="nav-toggle" class="nav__close" aria-label="Fermer le menu">&times;</label>
+
+                        <li class="nav__item"><a href="index.html"   class="nav__link">Accueil</a></li>
+                        <li class="nav__item"><a href="cers.html" class="nav__link nav__link--active">CERs</a></li>
+                        <li class="nav__item"><a href="favoris.html" class="nav__link">Mes CERS favoris</a></li>
+                        <li class="nav__item"><a href="gestion.html" class="nav__link">Gestion de CER</a></li>
+
+                        <a href="connexion.html" class="btn btn--primary nav__cta">Connexion</a>
+
+
+                    </ul>
+                </div>
+                </nav>
+            
+                <a href="connexion.html" class="btn btn--primary header__cta">Connexion</a>
+            </div>
+
+        </header>
+
+        <main>
+            <section class="page-title">
+                <div class="container">
+                    <h1 class="page-title__text">Tous les CERs</h1>
+                </div>
+            </section>
+
+            <section>
+                <div class="container listing">
+                    <div class="toolbar">
+
+                        <p class="toolbar__count">25 CERs au total</p>
+
+                        <form class="search toolbar__search">
+                            <input type="search" id="search-cers" class="search__input" placeholder="Rechercher un CER">
+                              <span class="search__icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                   <circle cx="11" cy="11" r="7"></circle>
+                                   <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                                </svg>
+                              </span>
+                        </form>
+                        
+                        <div class="toolbar__sort">
+                            <label for="sort-cers" class="toolbar__label">Sort By:</label>
+                            <select id="sort-cers" class="select">
+                                <option>Titre</option>
+                                <option>Date</option>
+                                <option>Niveau</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <aside class="filters">
+
+                        <div class="filters__group">
+                            <h2 class="filters__title">Niveaux</h2>
+                            <label class="filters__item" for="cers-niv-x5">
+                               <input type="checkbox" id="cers-niv-x5" class="filters__checkbox">
+                                 X5
+                            </label>
+
+                            <label class="filters__item" for="cers-niv-x4">
+                              <input type="checkbox" id="cers-niv-x4" class="filters__checkbox">
+                              X4
+                            </label>
+
+                            <label class="filters__item" for="cers-niv-x3">
+                             <input type="checkbox" id="cers-niv-x3" class="filters__checkbox">
+                             X3
+                            </label>
+
+                            <label class="filters__item" for="cers-niv-x2">
+                              <input type="checkbox" id="cers-niv-x2" class="filters__checkbox">
+                               X2
+                            </label>
+
+                            <label class="filters__item" for="cers-niv-x1">
+                               <input type="checkbox" id="cers-niv-x1" class="filters__checkbox">
+                              X1
+                            </label>
+
+                        </div>
+
+                        <div class="filters__group">
+                             <h2 class="filters__title">Domaines de spécispécialité</h2>
+                            <label class="filters__item" for="cers-dom-resaux-et-infra">
+                                <input type="checkbox" id="cers-dom-resaux-et-infra" class="filters__checkbox">
+                                Résaux & Infra
+                            </label>
+
+                            <label class="filters__item" for="cers-dom-genie-logiciel">
+                                 <input type="checkbox" id="cers-dom-genie-logiciel" class="filters__checkbox">
+                                Génie-logiciel
+                            </label>
+
+                            <label class="filters__item" for="cers-dom-gestion-de-projet">
+                                <input type="checkbox" id="cers-dom-gestion-de-projet" class="filters__checkbox">
+                                 Gestion de projet
+                            </label>
+
+                            <label class="filters__item" for="cers-dom-data">
+                                <input type="checkbox" id="cers-dom-data" class="filters__checkbox">
+                                 Data
+                            </label>
+
+                            <label class="filters__item" for="cers-dom-securite">
+                               <input type="checkbox" id="cers-dom-securite" class="filters__checkbox">
+                               Sécurité
+                            </label>
+
+                        </div>
+
+                    </aside>
+
+                    <div>
+                        <div class="cers__grid">
+
+                            <article class="card">
+                            <img src="assets/images/active-directory.jpg" class="card__image" alt="Annuaire Active Directory">
+
+                            <div class="card__meta">
+                                <!-- Icône cœur : ajout aux favoris -->
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Yasmine Bachir</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 3.2 Annuaire Active Directory</h3>
+
+                            
+                            <p class="card__text">
+                                L'Annuaire Active Directory (AD) est un service de gestion des identités
+                                et des accès utilisé principalement dans les environnements Windows.
+                                Il permet de centraliser l'authentification des utilisateurs, la gestion
+                                des ordinateurs du domaine et l'application des stratégies de groupe.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                            </article>
+
+                          <article class="card">
+                            <img src="assets/images/uml.jpg" class="card__image" alt="Modélisation UML">
+
+                            <div class="card__meta">
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Stessy-Clara Simo</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 2.2 Modélisation UML</h3>
+                            <p class="card__text">
+                                Le Langage de Modélisation Unifié, de l'anglais Unified Modeling Language,
+                                est un langage de modélisation graphique à base de pictogrammes conçu comme
+                                une méthode normalisée de visualisation dans les domaines du développement
+                                logiciel et en conception orientée objet.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                          </article>
+
+                          <article class="card">
+                            <img src="assets/images/api-webservice.jpg" class="card__image" alt="API et Webservice">
+
+                            <div class="card__meta">
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Jennifer Bela Nte</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 3.3 API et Webservice</h3>
+                            <p class="card__text">
+                                Les API sont principalement axées sur la communication entre applications pour
+                                l'accès aux fonctionnalités. L'EDI se concentre sur l'échange de documents
+                                structurés entre partenaires commerciaux selon des formats normalisés.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                          </article>
+
+                          <article class="card">
+                            <img src="assets/images/advanced-dev.jpg" class="card__image" alt="Développement avancé">
+
+                            <div class="card__meta">
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Siméon Manguele</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 4.1 Développement avancé</h3>
+                            <p class="card__text">
+                                Advance Web Development fait référence au processus de création de sites Web
+                                dynamiques et interactifs qui vont au-delà des pages Web statique. Cela implique
+                                l'utilisation de techniques et de technologies de codage avancées pour créer des
+                                sites Web fonctionnels et visuellement attrayants.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                          </article>
+
+                          <article class="card">
+                            <img src="assets/images/microservices.jpg" class="card__image" alt="Architecture microservices">
+
+                            <div class="card__meta">
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Aske</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 4.5 Architecture microservices</h3>
+                            <p class="card__text">
+                                Une architecture de microservices est un type d'architecture d'application dans
+                                laquelle l'application est développée sous la forme d'un ensemble de services.
+                                Chaque service est indépendant, déployable séparément et communique avec les
+                                autres via des interfaces légères.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                          </article>
+
+                          <article class="card">
+                            <img src="assets/images/architecture-distribuee.jpg" class="card__image" alt="Architecture distribuée">
+
+                            <div class="card__meta">
+                                <button class="card__fav" aria-label="Ajouter aux favoris">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <path d="M12 20.5 3.8 12.6a4.9 4.9 0 0 1 0-7 4.9 4.9 0 0 1 7 0l1.2 1.2 1.2-1.2a4.9 4.9 0 0 1 7 0 4.9 4.9 0 0 1 0 7z"></path>
+                                    </svg>
+                                </button>
+                                <span class="card__author">par Marcelline Djanga</span>
+                            </div>
+
+                            <h3 class="card__title">Prosit 4.5 Architecture distrubée</h3>
+                            <p class="card__text">
+                                L'architecture distribuée ou l'informatique distribuée désigne un système
+                                d'information ou un réseau pour lequel l'ensemble des ressources disponibles
+                                ne se trouvent pas au même endroit ni sur la même machine.
+                            </p>
+
+                            <a href="#" class="btn btn--secondary btn--block card__action">Consulter le CER</a>
+                          </article>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__top">
+
+                    <!-- Colonne 1 : Logo et coordonnees -->
+                    <div>
+                        <div class="footer__logo">
+                            <img src="assets/images/logo.png" alt="Archiva logo">
+                        </div>
+
+                        <p class="footer__contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2 .5v.4l8 5 8-5v-.4z"/>
+                        </svg>
+                            info@archiva.cm
+                        </p>
+
+                        <p class="footer__contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .6 3.6 1 1 0 0 1-.2 1z"/>
+                        </svg>
+                            +237 6 97 23 10 18
+                        </p>
+
+                        
+                        <p class="footer__contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5"/>
+                        </svg>
+                            Yansoki, Douala Cameroun
+                        </p>
+
+                    </div>
+                    <!-- Colonne 2 : liens de navigation -->
+                <div>
+                    <h3 class="footer__title">Accueil</h3>
+                    <a href="cers.html"    class="footer__link">CERs</a>
+                    <a href="favoris.html" class="footer__link">Mes CERs favoris</a>
+                    <a href="gestion.html" class="footer__link">Gestion de CER</a>
+                </div>
+
+                <!-- Colonne 3 : réseaux sociaux -->
+                <div>
+                    <h3 class="footer__title">Social Profiles</h3>
+                    <div class="footer__socials">
+                        <a href="#" class="footer__social" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer__social" aria-label="Whatsapp">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer__social" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8c0 .3.3.6.6.6h16.8c.3 0 .6-.3.6-.6V3.6a.6.6 0 0 0-.6-.6M8.3 18.3H5.6V9.7h2.7zM7 8.6a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2m11.4 9.7h-2.7V14c0-1-.3-1.7-1.2-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.3h-2.7V9.7h2.7v1.2a2.7 2.7 0 0 1 2.4-1.3c1.8 0 3 1.1 3 3.6z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                </div>
+
+                <div class="footer__bottom">
+                <p>&copy; 2024 Archiva. All rights reserved.</p>
+            </div>
+
+            </div>
+
+        </footer>
+        <script src="script/script.js" defer></script>
+ </body>
+</html>

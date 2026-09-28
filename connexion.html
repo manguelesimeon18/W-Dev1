@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html Lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Connexion Archiva</title>
+        <link rel="stylesheet" href="styles/styles.css">
+
+    </head>
+
+    <body class="auth">
+        <main class="auth__card">
+
+            <section class="auth__form">
+            <h1 class="auth__title">Se Connecter</h1>
+            <form action="login-form">
+
+                <div class="field">
+                    <label for="email" class="field__label">Email</label>
+                    <div class="field__control">
+                        <input type="email" id="email" class="field__input" placeholder="Entrez votre email" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="password" class="field__label">Mot de passe</label>
+                    <div class="field__control">
+                        <input type="password" id="password" class="field__input" placeholder="Entrez votre mot de passe"  required>
+                        <span class="field__icon">
+                            <svg width="20" height="20" viezbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12"></path>
+                                <circle cx="12" cy="12" r="2.8" fill="currentColor"  stroke="none"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                
+                <a href="#" class="auth__forgot">Mot de passe oublié?</a>
+                <button type="submit" class="btn btn--primary btn--block auth__submit">Se connecter</button>
+                <p class="auth__switch">
+                    Vous n'avez pas de compte?
+                    <a href="inscription.html" class="auth__link">Créer un compte</a>
+                </p>
+
+            </form>
+            </section>
+
+
+            <aside class="auth__illustration">
+                <img src="assets/images/login-illustration.png" alt="Login image">
+            </aside>
+        </main>
+
+        <script src="script/script.js" defer></script>
+    </body>
+</html>

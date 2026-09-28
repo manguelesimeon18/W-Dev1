@@ -1,0 +1,968 @@
+
+
+/* Variables de manières globale, on centralise ici les couleus, les polices , les espaces et rayons des boutons*/
+:root {
+    /* --- Couleurs --- */
+    --color-primary:        #F59200;   /* orange Archiva (boutons, accents) */
+    --color-primary-dark:   #d97f00;   /* orange survol */
+    --color-danger:         #f11f1f;   /* rouge "Supprimer" */
+    --color-text:           #101010;   /* texte principal (titres) */
+    --color-text-soft:      #4a4a4a;   /* texte secondaire (paragraphes) */
+    --color-muted:          #8a8a8a;   /* texte discret (placeholders) */
+    --color-white:          #ffffff;
+    --color-bg:             #f7f7f7;   /* fond général de la page */
+    --color-surface:        #ffffff;   /* fond des cartes */
+    --color-surface-alt:    #f2f2f2;   /* fond de certains champs et boutons secondaires */
+    --color-border:         #e4e4e4;
+    --color-backg: #ffedd1; /* fond de certains boutons et champs*/
+
+    /* Police */
+    --font-base: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+    /* Espacements */
+    --space-xs:  4px;
+    --space-sm:  8px;
+    --space-md:  16px;
+    --space-lg:  24px;
+    --space-xl:  40px;
+    --space-2xl: 64px;
+
+    /* --- Rayons & ombres --- */
+    --radius-sm: 20px;
+    --radius-md: 30px;
+    --radius-lg: 16px;
+    --radius-pill: 999px;           /* pour les éléments totalement arrondis */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+
+    /* --- Largeur maximale du contenu --- */
+    --container: 1200px;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   /* la largeur inclut padding + bordure : calculs plus simples */
+}
+
+body {
+    font-family: var(--font-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;   /* une image ne déborde jamais de son conteneur */
+    display: block;    /* supprime l'espace fantôme sous les images inline */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;  /* on enlève les puces : nos listes servent à la structure */
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;  /* les champs héritent de la police du site */
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+
+/*  */
+
+/* Conteneur centré : réutilisé par l'en-tête, le corps et le pied de page */
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;          /* centre horizontalement */
+    padding-inline: var(--space-lg);
+}
+
+/* Bandeau de titre en haut des pages internes (CERs, Favoris, Gestion) */
+.page-title {
+    padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.page-title__text {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Masque un élément à l'écran mais le laisse lisible par les lecteurs d'écran.
+   Utile pour les <label> obligatoires en accessibilité. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+
+/* Bouton et sa réutilisation sosu d'autres formes (DRY)*/
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    font-size: .95rem;
+    font-weight: 500;
+    transition: background-color .2s ease, color .2s ease, transform .1s ease;
+}
+
+.btn:active { transform: translateY(1px); }   /* petit retour visuel au clic */
+
+.btn--primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+.btn--primary:hover { background-color: var(--color-primary-dark); }
+
+.btn--secondary {
+    background-color: var(--color-backg);
+    color: var(--color-text);
+}
+.btn--secondary:hover { background-color: #f0991e; }
+
+.btn--ghost {
+    background-color: var(--color-white);
+    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
+}
+.btn--ghost:hover { background-color: var(--color-surface-alt); }
+
+.btn--danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+.btn--danger:hover { background-color: #d11414; }
+
+.btn--sm    { padding: 7px 16px; font-size: .85rem; }
+.btn--block { width: 100%; }
+
+
+/* EN-TÊTE */
+.header {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;   /* l'en-tête reste visible au défilement */
+    top: 0;
+    z-index: 50;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    height: 72px;
+}
+
+.header__logo img { height: 34px; width: auto; }
+
+/* Menu principal */
+.nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.nav__link {
+    display: block;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: .95rem;
+    color: var(--color-text);
+    transition: background-color .2s ease;
+}
+
+.nav__link:hover { background-color: var(--color-surface-alt); }
+
+/* Classe posée sur le lien de la page courante */
+.nav__link--active {
+    background-color: var(--color-backg);
+    font-weight: 500;
+}
+
+/* --- Bouton hamburger : visible uniquement en mobile (voir §14) --- */
+.nav__toggle,          /* le <label> hamburger */
+.nav__close {          /* la croix dans le panneau mobile */
+    display: none;
+}
+
+/* Bouton Connexion du panneau mobile : caché en version bureau
+   (en bureau c'est .header__cta, à droite de l'en-tête, qui est affiché) */
+.nav__cta { display: none; }
+
+/* La case à cocher qui pilote l'ouverture du menu mobile sans JavaScript.
+   Elle est toujours cachée : c'est le <label> qui sert de bouton. */
+.nav__checkbox { display: none; }
+
+
+/* 
+   6. SECTION HERO — .hero
+   Barre de recherche + message de bienvenue et autres
+ */
+.hero {
+    padding: var(--space-xl) 0 var(--space-2xl);
+    text-align: center;
+}
+
+/* --- Barre de recherche --- */
+.search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    max-width: 640px;
+    margin: 0 auto var(--space-2xl);
+    padding: 12px var(--space-md);
+    background-color: var(--color-backg);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.search__icon { flex-shrink: 0; color: var(--color-muted); }
+
+.search__input {
+    flex: 1;                 /* le champ occupe tout l'espace restant */
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: .9rem;
+    color: var(--color-text);
+}
+
+.search__input::placeholder { color: var(--color-muted); }
+
+/* --- Bloc de bienvenue --- */
+.hero__badge {
+    display: inline-block;
+    padding: 10px var(--space-lg);
+    margin-bottom: var(--space-md);
+    background-color: var(--color-white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.hero__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.hero__subtitle {
+    font-size: .9rem;
+    color: var(--color-text-soft);
+    margin-bottom: var(--space-xl);
+}
+
+.hero__actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;   /* les boutons passent l'un sous l'autre si l'écran est étroit */
+}
+
+
+/* =========================================================================
+   7. SECTION "LES MEILLEURS CERs" 
+   ========================================================================= */
+.cers { padding-bottom: var(--space-2xl); }
+
+.cers__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.cers__title {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+}
+
+.cers__description {
+    font-size: .85rem;
+    color: var(--color-text-soft);
+    max-width: 620px;
+}
+
+/* Grille responsive de cartes */
+.cers__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}
+
+
+/* 8. CARTE CER — .card */
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg);
+    transition: box-shadow .25s ease, transform .25s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.card__image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;              /* l'image remplit la zone sans se déformer */
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-md);
+}
+
+/* Ligne : cœur "favori" à gauche, auteur à droite */
+.card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.card__fav {
+    color: var(--color-text);
+    line-height: 0;                 /* évite l'espace sous l'icône SVG */
+    transition: color .2s ease, transform .2s ease;
+}
+.card__fav:hover { transform: scale(1.1); }
+
+/* Modificateur : cœur déjà en favori (rouge plein), utilisé sur favoris.html */
+.card__fav--active { color: #f4454f;  }
+
+.card__author {
+    font-size: .85rem;
+    color: var(--color-text-soft);
+}
+
+.card__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    min-height: 2.6em;              /* aligne les titres sur 1 ou 2 lignes */
+}
+
+/* Description tronquée à 4 lignes PAR LE CSS (et non en coupant le texte
+   dans le HTML) : c'est la consigne "Note" page 10 du guide étudiant. */
+.card__text {
+    font-size: .82rem;
+    color: var(--color-text-soft);
+    text-align: justify;
+    margin-bottom: var(--space-lg);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;          /* nombre de lignes affichées */
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* margin-top:auto pousse le bouton en bas : toutes les cartes d'une ligne
+   ont ainsi leur bouton aligné, quelle que soit la longueur du texte. */
+.card__action { margin-top: auto; }
+
+/* LA FENËTRE DE L'AJOUR DEC */
+
+.modal {
+    position: fixed;
+    inset: 0;                 /* occupe tout l'écran */
+    display: grid;
+    place-items: center;
+    padding: var(--space-lg);
+
+    /* État fermé : invisible et non cliquable */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+    z-index: 200;
+}
+
+/* État ouvert (voir l'explication ci-dessus) */
+.modal:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Voile sombre derrière la fenêtre ; c'est un lien, donc cliquable pour fermer */
+.modal__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+/* La boîte blanche */
+.modal__dialog {
+    position: relative;       /* référence pour positionner la croix */
+    width: 100%;
+    max-width: 760px;
+    max-height: 90vh;         /* jamais plus haute que l'écran... */
+    overflow-y: auto;         /* ...le contenu défile à l'intérieur */
+    padding: var(--space-xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.modal__close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    color: var(--color-danger);
+    line-height: 0;
+}
+
+.modal__title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xl);
+}
+
+/* Liste des domaines de spécialité : encadré gris clair */
+.modal__checklist {
+    padding: var(--space-md);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-md);
+}
+
+/* Dernière case : on enlève la marge basse pour un encadré bien équilibré */
+.modal__checklist .filters__item:last-child { margin-bottom: 0; }
+
+.modal__textarea {
+    min-height: 130px;
+    resize: vertical;         /* redimensionnable en hauteur uniquement */
+}
+
+/* Zone de dépôt de fichier : c'est un <label> lié à un <input type="file">
+   masqué, ce qui permet de la styliser librement. */
+.upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background-color: var(--color-surface-alt);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.upload:hover { background-color: #e9e9e9; }
+
+.upload__icon { color: var(--color-text); }
+
+.upload__text {
+    font-style: italic;
+    font-size: .9rem;
+    color: var(--color-text-soft);
+    text-align: center;
+}
+
+/* Bouton Enregistrer centré sous le formulaire */
+.modal__submit {
+    display: block;
+    margin: var(--space-xl) auto 0;
+    padding: 14px var(--space-2xl);
+}
+
+
+
+/* 9. BARRE D'OUTILS ET FILTRES (pages CERs / Favoris) */
+
+
+/* Mise en page à deux colonnes : filtres (280px) + contenu (le reste) */
+.listing {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-2xl);
+}
+
+/* --- Barre du haut : total, recherche, tri, mode d'affichage --- */
+.toolbar {
+    grid-column: 1 / -1;            /* occupe toute la largeur de la grille */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    padding: var(--space-lg) 0;
+}
+
+.toolbar__count { font-size: .85rem; color: var(--color-text-soft); }
+
+.toolbar__search { flex: 1; max-width: 380px; margin: 0; }
+
+.toolbar__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.toolbar__label { font-size: .9rem; font-weight: 500; }
+
+.select {
+    padding: 10px var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+    color: var(--color-text);
+}
+
+/* Boutons "grille / liste" */
+.view-switch { display: flex; gap: var(--space-sm); }
+
+.view-switch__btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+/* Modificateur : mode d'affichage actuellement sélectionné */
+.view-switch__btn--active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* --- Colonne des filtres --- */
+.filters__group { margin-bottom: var(--space-xl); }
+
+.filters__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+
+.filters__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: 10px;
+    font-size: .95rem;
+    color: var(--color-text-soft);
+    cursor: pointer;
+}
+
+.filters__checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);   /* colore la case cochée en orange */
+    cursor: pointer;
+}
+
+
+/*   10. PAGINATION — .pagination    */
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+}
+
+.pagination__link {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-surface-alt);
+    font-size: .85rem;
+    transition: background-color .2s ease;
+}
+
+.pagination__link:hover { background-color: #e2e2e2; }
+
+.pagination__link--active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+
+/*    11. PAGE "GESTION DE CER" — tableau    */
+.manage { padding-bottom: var(--space-2xl); }
+
+.manage__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+}
+
+.manage__filter {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: .8rem;
+    color: var(--color-text-soft);
+}
+
+/* Le conteneur permet le défilement horizontal du tableau sur petit écran */
+.table-wrapper {
+    overflow-x: auto;
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;   /* supprime l'espace entre les bordures */
+    min-width: 820px;            /* en dessous, la barre de défilement apparaît */
+}
+
+.table__head-cell {
+    text-align: left;
+    font-size: .95rem;
+    font-weight: 700;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+.table__cell {
+    padding: var(--space-md);
+    font-size: .9rem;
+    color: var(--color-text-soft);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table__row:hover { background-color: var(--color-bg); }
+
+.table__actions { display: flex; gap: var(--space-sm); }
+
+
+/* 
+   12. PAGES CONNEXION / INSCRIPTION — .auth
+   Ces pages n'ont PAS d'en-tête et utilisent un
+   dégradé orange en arrière-plan.
+  */
+.auth {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;          /* centre la carte horizontalement ET verticalement */
+    padding: var(--space-xl) var(--space-lg);
+
+    /* Dégradé de la maquette : orange soutenu en haut -> blanc en bas */
+    background: linear-gradient(180deg, #f0a35c 0%, #f8cf8d 45%, #fdf3e4 75%, #ffffff 100%);
+}
+
+.auth__card {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* formulaire | illustration */
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl);
+    background-color: var(--color-white);
+    border-radius: 28px;
+    box-shadow: var(--shadow-md);
+}
+
+.auth__title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xl);
+}
+
+.auth__illustration img { width: 100%; height: auto; }
+
+/* --- Champs de formulaire --- */
+.field { margin-bottom: var(--space-md); }
+
+.field__label {
+    display: block;
+    font-size: .9rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+/* Enveloppe du champ : permet de poser une icône (œil) à droite de l'input */
+.field__control {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px var(--space-md);
+    background-color: var(--color-surface-alt);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    transition: border-color .2s ease;
+}
+
+/* :focus-within = le conteneur réagit quand l'input à l'intérieur est actif */
+.field__control:focus-within { border-color: var(--color-primary); }
+
+.field__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+}
+
+.field__input::placeholder { color: var(--color-muted); }
+
+.field__icon { color: var(--color-text); line-height: 0; }
+
+/* Lien "Mot de passe oublié ?" aligné à droite */
+.auth__forgot {
+    display: block;
+    text-align: right;
+    font-size: .85rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+}
+.auth__forgot:hover { text-decoration: underline; }
+
+.auth__submit { margin-bottom: var(--space-md); padding: 14px; }
+
+.auth__switch {
+    text-align: center;
+    font-size: .9rem;
+    color: var(--color-text);
+}
+
+.auth__link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+
+/*   13. PIED DE PAGE — .footer   */
+.footer {
+    background-color: var(--color-white);
+    padding: var(--space-2xl) 0 var(--space-lg);
+}
+
+.footer__top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.footer__logo img { height: 42px; width: auto; margin-bottom: var(--space-lg); }
+
+.footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: .9rem;
+    color: var(--color-text-soft);
+    margin-bottom: 10px;
+}
+
+.footer__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+
+.footer__link {
+    display: block;
+    font-size: .9rem;
+    color: var(--color-text-soft);
+    margin-bottom: var(--space-sm);
+}
+.footer__link:hover { color: var(--color-primary); }
+
+.footer__socials { display: flex; gap: var(--space-sm); }
+
+.footer__social {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface-alt);
+    color: var(--color-text);
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.footer__social:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.footer__bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-lg);
+    text-align: center;
+    font-size: .85rem;
+    color: var(--color-text-soft);
+}
+
+
+/*   14. RESPONSIVE — media queries   */
+
+/* ---------- Tablette : jusqu'à 992px ---------- */
+@media only screen and (max-width: 992px) {
+
+    /* Les filtres passent au-dessus de la liste */
+    .listing { grid-template-columns: 1fr; }
+
+    /* Pied de page sur 2 colonnes */
+    .footer__top { grid-template-columns: 1fr 1fr; }
+
+    /* Les pages connexion/inscription : l'illustration passe sous le formulaire */
+    .auth__card {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+        padding: var(--space-xl);
+    }
+
+    /* L'illustration est décorative : on l'affiche en premier, plus petite */
+    .auth__illustration { order: -1; max-width: 340px; margin-inline: auto; }
+}
+
+
+/* ---------- Mobile : jusqu'à 768px ---------- */
+@media only screen and (max-width: 768px) {
+
+    body { font-size: 15px; }
+
+    .container { padding-inline: var(--space-md); }
+
+    /* --- EN-TÊTE : on affiche le hamburger et on cache le menu --- */
+    .header__inner { height: 64px; }
+
+    .header__cta { display: none; }        /* le bouton Connexion passe dans le panneau */
+
+    .nav__toggle {
+        display: block;                    /* le label devient le bouton hamburger */
+        cursor: pointer;
+        line-height: 0;
+    }
+
+    /* Panneau du menu mobile : hors écran par défaut  */
+    .nav__panel {
+        position: fixed;
+        inset: 0;                          /* top/right/bottom/left = 0 : plein écran */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--space-xl);
+        background-color: rgba(0, 0, 0, .45);   /* voile sombre derrière */
+
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .25s ease, visibility .25s ease;
+        z-index: 100;
+    }
+
+    /* ASTUCE SANS JAVASCRIPT :
+       quand la case .nav__checkbox est cochée (clic sur le label hamburger),
+       le sélecteur ~ (frère suivant) applique ces styles au panneau. */
+    .nav__checkbox:checked ~ .nav__panel {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        gap: 0;
+        background-color: var(--color-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+        position: relative;
+    }
+
+    .nav__item { width: 100%; }
+
+    .nav__item + .nav__item { border-top: 1px solid var(--color-border); }
+
+    .nav__link {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: var(--space-md);
+        border-radius: 0;
+    }
+
+    .nav__link--active { background: none; font-weight: 700; }
+
+    /* Croix de fermeture : c'est un second label lié à la même case */
+    .nav__close {
+        display: block;
+        position: absolute;
+        top: var(--space-md);
+        right: var(--space-md);
+        font-size: 1.8rem;
+        line-height: 1;
+        color: var(--color-text-soft);
+        cursor: pointer;
+    }
+
+    /* Bouton Connexion à l'intérieur du panneau mobile */
+    .nav__cta {
+        display: block;
+        margin: var(--space-xl) auto 0;
+        width: fit-content;
+    }
+
+    /* --- HERO --- */
+    .hero { padding: var(--space-lg) 0 var(--space-xl); }
+    .hero__badge   { font-size: 1rem; padding: 10px var(--space-md); }
+    .hero__title   { font-size: 1.15rem; }
+    .hero__actions { gap: var(--space-sm); }
+
+    /* --- SECTION CERs : une seule colonne --- */
+    .cers__grid   { grid-template-columns: 1fr; }
+    .cers__header { flex-direction: column; }
+    .cers__title  { font-size: 1.35rem; }
+
+    /* --- BARRE D'OUTILS : tout en colonne --- */
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .toolbar__search { max-width: none; }
+
+    /* --- Titres de page --- */
+    .page-title__text { font-size: 1.5rem; }
+
+    /* --- Pages connexion / inscription --- */
+    .auth__card  { padding: var(--space-lg); border-radius: var(--radius-lg); }
+    .auth__title { font-size: 1.6rem; margin-bottom: var(--space-lg); }
+
+    /* --- PIED DE PAGE : une colonne --- */
+    .footer__top { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
